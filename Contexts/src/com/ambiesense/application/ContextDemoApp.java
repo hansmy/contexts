@@ -131,12 +131,12 @@ public class ContextDemoApp {
 
 
 
-			Object value5 = c1.getAttribute("Time");
-			Object value6 = c2.getAttribute("Time");
+			Object value5 = c1.getAttribute("time");
+			Object value6 = c2.getAttribute("time");
 			System.out.println("Relevance= "+ Relevance.relevance(value5, value6, (int)10));
 
-			Object value7 = c1.getAttribute("Text");
-			Object value8 = c2.getAttribute("Text");
+			Object value7 = c1.getAttribute("longitude");
+			Object value8 = c2.getAttribute("longitude");
 			System.out.println("Relevance= "+ Relevance.relevance(value7, value8, (int)4));
 
 			System.out.println("Reading all links as html...)");		
