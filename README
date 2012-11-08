@@ -1,0 +1,95 @@
+   /*==========================================================
+    README: AmbieSense Context Software GPL Source Code.
+    ===========================================================
+    COPYRIGHT
+    
+    Copyright (C) 2005 and onwards by AmbieSense Limited, 
+    and/or its subsidiaries and co-founders. AmbieSense Limited
+    is an R&D-focused company incorporated in Scotland.
+
+    PURPOSE OF THE SOFTWARE RELEASE
+    
+    The AmbieSense Context Software is for storing, retrieving, and matching 
+    context information and meta-data for applications and services.    
+    The theoretical foundations of this software have been published in various 
+    scientific publications. 
+     
+    TARGET AUDIENCE
+    
+    This release has been made available for the general public to be able to 
+    contribute and use e.g. for making ubiquitous and context-aware applications and 
+    services, and to help in making such adaptive systems widespread in the society 
+    to the benefit of application developers and organizations interested in 
+    the retrieval and filtering context information and meta-data across a wide 
+    spectrum of applications and services. A good starting point for understanding 
+    the underlying foundations for this software, is to read: 
+    
+    PROPOSED READING
+    
+		Information Retrieval: Searching in the 21st Century
+		Dr Ayse Goker (Editor), John Davies (Co-Editor)
+		ISBN: 978-0-470-03363-0
+		Available E-book as and hard-cover book
+		320 pages
+		December 2009
+		Chapter: Context and Information Retrieval
+	
+	The AmbieSense Context Software Source Code is released as a 
+	prototype software for research and development purposes 
+	for anyone to use the way they want under the 
+	the terms and conditions of the GPL version 3 license.
+
+    ROADMAP TO IMPLEMENTATION
+    
+    This new initial version has been completely re-written with a simpler 
+	SQL database in a datawarehouse style. The long-term goal is try to make it 
+	a cloud-based and highly scalable solution that will use Solandra 
+	as the storage solution.
+	      
+    SOFTWARE MADE AVAILABLE UNDER GPL LICENSE VERSION 3
+    
+    The AmbieSense Context Software GPL Source Code is made available under the 
+    GNU General Public License, Version 3. Reference: GNU General Public 
+    License, version 3, found on http://www.gnu.org/licenses/ 
+
+	FREE SOFTWARE - NO WARRANTY OR RESPONSIBILITY FOR AMBIESENSE
+	
+	The AmbieSense Context Software GPL Source Code is free software: 
+    you can redistribute it and/or modify it under the terms of the 
+    GNU General Public License Version 3 as published by
+    the Free Software Foundation. 
+    
+    INFORM WHEN THE SOFTWARE IS BEING USED 
+    
+	If the program you make does terminal interaction, make it output a short
+    notice like this when it starts in an interactive mode:
+
+    AmbieSense Context Software. This program comes with ABSOLUTELY NO WARRANTY; 
+    for details type `show w'. This is free software, and you are welcome to 
+    redistribute it under certain conditions; type `show c' for details.
+	
+	QUESTIONS ABOUT LICENSE, CONTRIBUTIONS, GOVERNANCE
+	
+	If you have questions concerning this license or the applicable 
+	additional terms, or would like to contribute to the development of the
+	AmbieSense Context Software GPL Source Code, you may contact us in writing: 
+
+	    AmbieSense Limited 
+	    7 Queens Gardens
+	    Aberdeen
+	    AB25 4YD
+	    Scotland 
+	    or email:    
+	    kontactATambiesense.com (replace "AT" with "@").
+	
+	THANK YOU! 
+
+ 	Please enjoy the software. We hope you will be able to contribute 
+ 	to the code repository together with us!
+	       
+    	Best regards,
+    	Hans Myrhaug, 
+    	Co-founder,
+        AmbieSense Limited
+
+     ===========================================================*/
