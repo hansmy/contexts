@@ -45,45 +45,7 @@ import java.net.URL;
 import com.ambiesense.persistent.AbstractPersistentObject;
 import com.ambiesense.persistent.UUIDGenerator;
 
-/**
- * <p>
- *  This class is used for linking between Contexts/Attributes/Values/ContentItems/InfoPackage to
- *  other  ContentItem and InfoPackage objects
- * </p>
- * <p>
- * 	Linking is done by creating a Link object. This Link is added to the object you want to link from.
- * </p>
- * <p>.
- *  A link simply indicates that there is a relation between these objects but makes no assumption on
- *  the nature of this relationship. A link may has a relevance (an int between 0 and 100) that 
- *  indicates how relevant this link is. 0 indicates lowest relevance and 100 indicates highest relevance.
- *  A link is bidirectional in the sense that the link has the same relevance both directions. 
- * </p>
- * 
- * @author Hans Myrhaug
- * @since Amber 0.1
- * @version 1.0 
- * 
- * <br>
- * <br>
- * <p> 
- *  AmbieSense Ltd   
- * </p>
- * <p>	
- * (C) Copyright from 2005 and onwards by AmbieSense Ltd.	All rights reserved.
- * </p>
- * <p>
- * <b>NOTICE:</b>  All information contained herein or attendant hereto is,
- * and remains, the property of AmbieSense Ltd.  Many of the
- * intellectual and technical concepts contained herein are
- * proprietary to AmbieSense Ltd and may be covered
- * by National and Foreign Patents or Patents Pending, or are
- * protected as trade secrets.  Any dissemination of this
- * information or reproduction of this material is strictly
- * forbidden unless prior written permission is obtained
- * from AmbieSense Ltd.
- * </p>
- */  
+
 public class Link extends AbstractPersistentObject implements Serializable{
 
 	//HTML5 link attributes: coords href hreflang media name rel target type timestamp

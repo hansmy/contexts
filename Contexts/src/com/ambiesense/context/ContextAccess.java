@@ -49,53 +49,7 @@ import java.sql.Statement;
 import java.util.Observable;
 import java.util.Vector;
 
-/**
- * <p>
- * The context middleware serves as an administrative unit between surrounding
- * ambiesense applications and context spaces. The role of the context middleware is to 
- * administer context spaces. This includes: the creation of context spaces, access rights to 
- * context spaces and the deletion of context spaces. A Context Middleware has one valid root user.
- * </p>
- * <p>
- * There is only one ContextMiddleware instance running on every API implementation. Hence this
- * class has no public constructor in order to successfully implement a singleton pattern. Use the <code>getInstance()</code> method to
- * retrive an instance. 
- * </p>
- * <p>
- * When the <code>getInstance()</code> method is invoked, the ContextMiddleware is opened for use. 
- * Use the <code>closeContextMiddleware()</code> method when done using it to free resources held by the middleware. 
- * </p>
- * <p>
- * <b>NOTE:</b>The ContextMiddleware is opened when the context middleware class is constructed (if the instance was closed). However, since 
- * many objects uses the same instance, an object may close the context middleware. 
- * Use the <code>contextMiddlewareIsClosed()</code> method to determine whether or not the context middleware is closed. Use the
- * <code>openContextMiddleware()</code> method to open.
- * </p>
- * 
- * @author Hans Myrhaug
- * @since Amber 0.1
- * @version 1.0 
- * 
- * <br>
- * <br>
- * <p> 
- *  AmbieSense Ltd   
- * </p>
- * <p>	
- * (C) Copyright from 2005 and onwards by AmbieSense Ltd.	All rights reserved.
- * </p>
- * <p>
- * <b>NOTICE:</b>  All information contained herein or attendant hereto is,
- * and remains, the property of AmbieSense Ltd.  Many of the
- * intellectual and technical concepts contained herein are
- * proprietary to AmbieSense Ltd and may be covered
- * by National and Foreign Patents or Patents Pending, or are
- * protected as trade secrets.  Any dissemination of this
- * information or reproduction of this material is strictly
- * forbidden unless prior written permission is obtained
- * from AmbieSense Ltd.
- * </p>
- */  
+
 public final class ContextAccess extends Observable implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -104,14 +58,14 @@ public final class ContextAccess extends Observable implements Serializable{
 
 	/**
 	 * Private constructor that suppresses the default public constructor to avoid multiple instances.
-	 * We only want one instance of the context manager running 
+	 * We only want one instance of the context access running 
 	 * therefore we have a private constructor
 	 */
 	private ContextAccess() {	
 	}
 	/**
-	 * Method to get the instance of the ContextManager.
-	 * @param a user of the ContextManager.
+	 * Method to get the instance of the ContextAccess.
+	 * @param a user of the ContextAccess.
 	 * @return returns the instance if the user is validated, otherwise false
 	 * 
 	 */
@@ -128,10 +82,10 @@ public final class ContextAccess extends Observable implements Serializable{
 		}
 	}
 	/**
-	 * Changes the owner of the context manager
-	 * @param oldOwner the current owner of the context manager
-	 * @param newOwner the new owner of context manager
-	 * @throws IllegalArgumentException if something is wrong with the parameters (e.g. oldOwner is wrong, or newOwner already exist)
+	 * Changes the owner of the context access
+	 * @param oldOwner the current owner of the context access
+	 * @param newOwner the new owner of context access
+	 * @throws IllegalArgumentException if something is wcontext accessameters (e.g. oldOwner is wrong, or newOwner already exist)
 	 */	
 	public static synchronized boolean changeOwner(User oldOwner, User newOwner) {
 		return contextAccess.changeOwner(oldOwner, newOwner);
@@ -239,7 +193,7 @@ public final class ContextAccess extends Observable implements Serializable{
 	}
 
 	/**
-	 * Use this method when you are starting to use the context middleware. 
+	 * Use this method when you are starting to use the context software. 
 	 * @return true if context space opens correctly, false if not 
 	 */
 	public static boolean connect(){	
@@ -256,20 +210,20 @@ public final class ContextAccess extends Observable implements Serializable{
 
 
 	/**
-	 * Check to see if context middleware is closed
-	 * @return true if context middleware is closed, false if it is open 
+	 * Check to see if context software is closed
+	 * @return true if context software is closed, false if it is open 
 	 */
 	public static boolean isClosed(){
 		return contextAccess.isClosed();
 	}
 
 	/*
-	 * Private class that handles the context middlewares database operations  
+	 * Private class that handles the context softwares database operations  
 	 * 
 	 */
 	private static class ContextAccessStorage{
 
-		private String dataBaseURL ;//="jdbc:pointbase:micro:contextmiddleware,database.home=database,crypto.databaseKey=M1aThi3deOg96Marita";
+		private String dataBaseURL ;
 		private Connection connection;
 
 		protected ContextAccessStorage(){
@@ -370,7 +324,7 @@ public final class ContextAccess extends Observable implements Serializable{
 
 		protected synchronized boolean createDefaultOwner(){
 			try{
-				//finn ut om en bruker er satt som owner
+				
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement .executeQuery("SELECT MAX(OwnerID) FROM ContextMiddlewareOwner");
 				while(resultSet.next()){
@@ -649,7 +603,7 @@ public final class ContextAccess extends Observable implements Serializable{
 						userGroupID = resultSet.getString(1); 				
 					}
 				}
-				//sjekk om brukeren er lagt til denne gruppen fra før 
+				//sjekk om brukeren er lagt til denne gruppen fra fï¿½r 
 				if(userGroupID!=null){
 					//legg til
 					resultSet = statement.executeQuery("SELECT UserID FROM UserAndUserGroups WHERE UserGroupID ='"+userGroupID+"'");
@@ -748,10 +702,10 @@ public final class ContextAccess extends Observable implements Serializable{
 
 		protected boolean fireUpdateQueries(Vector<String> queryVector){
 			try{
-				connection.setAutoCommit(false);//slå av autocommitt slik at vi kan gjøre en rollback dersom noe feiler under utførelsen
+				connection.setAutoCommit(false);//slï¿½ av autocommitt slik at vi kan gjï¿½re en rollback dersom noe feiler under utfï¿½relsen
 				Statement statement=connection.createStatement();
 
-				//så lenge det er queryer i vector, fyr i vei 
+				//sï¿½ lenge det er queryer i vector, fyr i vei 
 				for(int i=0; i<queryVector.size(); i++){
 					//System.out.println((String)queryVector.elementAt(i));
 					statement.executeUpdate((String)queryVector.elementAt(i));
@@ -759,15 +713,15 @@ public final class ContextAccess extends Observable implements Serializable{
 				}				
 				//commit
 				connection.commit();			
-				//har vi kommet hit så er allt vel fra databasens sitt synspunkt 
+				//har vi kommet hit sï¿½ er allt vel fra databasens sitt synspunkt 
 
 				connection.setAutoCommit(true);
 				//this.disconnect();
 				return true;				
 			}catch(Exception e){
 				try{
-					connection.rollback();//gjør en rollback dersom noe feiler, slik at ingen av operasjonene vi har planlagt blir utført
-					connection.setAutoCommit(true); //slå på autocommitt igjen
+					connection.rollback();//gjï¿½r en rollback dersom noe feiler, slik at ingen av operasjonene vi har planlagt blir utfï¿½rt
+					connection.setAutoCommit(true); //slï¿½ pï¿½ autocommitt igjen
 					return false;
 				}catch(SQLException ex){
 					//do nothing

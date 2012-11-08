@@ -308,14 +308,14 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 		Double hashValue;
 		double hashDouble;
 
-		//hent en enumeration av nøklene i hashtabellen 
+		//hent en enumeration av nï¿½klene i hashtabellen 
 		Enumeration keyEnumeration = searchResults.keys();
 
 		//for alle elementene i enumeration 
 		while (keyEnumeration.hasMoreElements()) {
 			String key = (String) keyEnumeration.nextElement();
 
-			//for alle nøkler, hent verdien i hastabellen, og rekn ut prosent 
+			//for alle nï¿½kler, hent verdien i hastabellen, og rekn ut prosent 
 			hashValue = (Double) searchResults.get(key);
 
 			hashDouble = hashValue.doubleValue();
@@ -407,9 +407,9 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 	 */
 	public synchronized boolean emptyContextSpace(){
 		boolean success = false;
-		//pointBase.openConnection();
+	
 		success = contextDataBase.deleteAllContextInfo();
-		//pointBase.closeConnection();
+	
 		return success;
 	}
 
@@ -449,9 +449,6 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 	}
 
 
-	//****************************************
-	//the PointBase class
-	//*****************************************
 	/**
 	 * Class that connects to the database and utilises the connections and resultsets to do what it's told from 
 	 * the ContextSpace class. This is the lowest level towards the actual database 
@@ -479,9 +476,6 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 		private PreparedStatement selectContextsWithTemplate;
 
 
-		/**
-		 * Constructor for PointBase.
-		 */
 		public ContextStorage() {
 			//open connection to the database
 			try{
@@ -532,7 +526,7 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 		//create an empty database 
 		public synchronized boolean createDataBaseTables(){
 			try{
-				//vector for å samle opp queryene
+				
 
 				Vector<String> queries = new Vector<String>();
 
@@ -553,7 +547,7 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 				deleteLink 	    = connection.prepareStatement("DELETE FROM Links WHERE LinkUUID = ?");
 				deleteLinks     = connection.prepareStatement("DELETE FROM Links WHERE ContextUUID = ?");
 				selectTemplate  = connection.prepareStatement("SELECT Template, Attribute, Type, MaxDistance FROM Templates WHERE Template = ?");
-				//selectTemplate  = connection.prepareStatement("SELECT Template, Name, Attribute, Type, MaxDistance FROM Templates WHERE Template = ?");
+				
 				deleteTemplate 	= connection.prepareStatement("DELETE FROM Templates WHERE Template = ?");
 				selectTemplates = connection.prepareStatement("SELECT Template, Attribute, Type, MaxDistance FROM Templates");
 				selectContext 	= connection.prepareStatement("SELECT Template, ContextUUID, Attribute, Timestamp, Type, Text, Double, Long, Boolean FROM Contexts WHERE ContextUUID = ?");
@@ -606,11 +600,11 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 		private synchronized boolean addTemplate(Template template){
 			try{
 				if (this.connect() == true){
-					//String templateUUID = template.getId();
+					
 					String templateName = template.getTemplateName();
 
 					selectTemplate.setString(1, templateName);
-					//selectTemplate.setString(1, templateName);
+					
 
 					ResultSet resultSet = selectTemplate.executeQuery();
 
@@ -964,10 +958,10 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 					String linkText    = link.getLinkText();
 					long timestamp     = link.getTimestamp();
 					
-					//Try to update all fields apart from linkUUID:
+					
 					String query = "UPDATE Links SET ContextUUID='"+contextUUID+"', Href='"+href+"', Hreflang='"+hreflang+"', Media='"+media+"', Rel='"+rel+"', Target='"+target+"', Type='"+type+"', LinkText='"+linkText+"', Timestamp='"+timestamp+"' WHERE LinkUUID='"+linkUUID+"'";		
 
-					//String query = "UPDATE Links SET Source='"+source+"' , Name='"+name+"' , Variant='"+variant+"' WHERE LinkUUID='"+linkUUID+"'";
+					
 					Statement statement = connection.createStatement();
 					statement.executeUpdate(query); 					
 				} else{
@@ -988,9 +982,9 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 					ResultSet resultSet = selectLink.executeQuery();
 					if (resultSet.first()){			
 						link.setContextUUID(resultSet.getString("ContextUUID"));
-						//To guarantee that the linkUUID is the same in the database as in the object:
+						
 						link.setLinkUUID(linkUUID);	
-						//
+						
 						link.setHref(resultSet.getString("Href"));
 						link.setHreflang(resultSet.getString("Hreflang"));
 						link.setMedia(resultSet.getString("Media"));	
@@ -1018,9 +1012,9 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 					ResultSet resultSet = selectLinks.executeQuery();
 					while (resultSet.next()){
 						Link link = new Link();
-						//To guarantee that the contextUUID is the same in the database and in the object:
+						
 						link.setContextUUID(contextUUID);
-						//
+						
 						link.setLinkUUID(resultSet.getString("LinkUUID"));				
 						link.setHref(resultSet.getString("Href"));
 						link.setHreflang(resultSet.getString("Hreflang"));
@@ -1030,7 +1024,7 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 						link.setType(resultSet.getString("Type"));
 						link.setLinkText(resultSet.getString("LinkText"));
 						link.setTimestamp(resultSet.getLong("Timestamp"));
-						//Put the new link into links
+						
 						links.put(link.getLinkUUID(), link);
 					} 
 				}catch(SQLException e){
@@ -1082,9 +1076,9 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 					link.setType(resultSet.getString("Type"));
 					link.setLinkText(resultSet.getString("LinkText"));
 					link.setTimestamp(resultSet.getLong("Timestamp"));
-					//Put the new link into links
+					
 					links.put(link.getLinkUUID(), link);
-					//links.addElement(link);
+					
 				} 
 			}catch(SQLException e){
 				e.printStackTrace();
@@ -1156,25 +1150,25 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 
 		private synchronized boolean fireUpdateQueries(Vector<String> queryVector){
 			try{
-				connection.setAutoCommit(false);//slå av autocommitt slik at vi kan gjøre en rollback dersom noe feiler under utførelsen
+				connection.setAutoCommit(false);
 				Statement statement=connection.createStatement();
 
-				//så lenge det er queryer i vector, fyr i vei 
+				 
 				for(int i=0; i<queryVector.size(); i++){
 					statement.executeUpdate((String)queryVector.elementAt(i));
 				}
 
-				//commit
+				
 				connection.commit();			
-				//har vi kommet hit så er allt vel fra databasens sitt synspunkt 
+				 
 				connection.setAutoCommit(true);
 				return true;
 			}catch(Exception e){
 				try{
-					connection.rollback();//gjør en rollback dersom noe feiler, slik at ingen av operasjonene vi har planlagt blir utført
-					connection.setAutoCommit(true); //slå på autocommitt igjen
+					connection.rollback();
+					connection.setAutoCommit(true);
 				}catch(Exception ex){
-					//do nothing
+					
 					return false;
 				}
 				return false;
@@ -1192,12 +1186,12 @@ public final class ContextSpace implements Serializable/*ContextMiddlewareEventL
 
 		public synchronized Contexts findContexts(Template template, Attributes attributes){
 			return new Contexts();
-			//return pointBase.attributeSearch(attributes);
+			
 		}
 
 		public synchronized Contexts findContexts(Context context){
 			return new Contexts();
-			//return pointBase.contextSearch(context);
+			
 		}
 	}	
 }
